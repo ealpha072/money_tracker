@@ -11,22 +11,16 @@ const Wrapper = ({componentProp}) => {
 
 			<ul className="list-unstyled components">
 				<li className="active">
-					<a
-					href="#homeSubmenu"
-					data-toggle="collapse"
-					aria-expanded="false"
-					className="dropdown-toggle"
-					>
-					<i className="fas fa-home"></i> Home
-					</a>
-					<ul className="collapse list-unstyled" id="homeSubmenu">
-					<li>
-						<a href="#">Home 1</a>
-					</li>
-					</ul>
+					<a href="#"> <i className="fa fa-user"></i> Dashboard</a>
 				</li>
 				<li>
-					<a href="#"> <i className="fas fa-briefcase"></i> About</a>
+					<a href="#"> <i className="fa fa-usd"></i> Transactions</a>
+				</li>
+				<li>
+					<a href="#"> <i className="fa fa-credit-card"></i> Accounts</a>
+				</li>
+				<li>
+					<a href="#"> <i className="fa fa-cogs"></i> Settings</a>
 				</li>
 			</ul>
       	</nav>
@@ -40,13 +34,13 @@ const Wrapper = ({componentProp}) => {
 					<span>Toggle</span>
 				</button>
 				<button
-				className="btn btn-dark d-inline-block d-lg-none ml-auto"
-				type="button"
-				data-toggle="collapse"
-				data-target="#navbarSupportedContent"
-				aria-controls="navbarSupportedContent"
-				aria-expanded="false"
-				aria-label="Toggle navigation"
+					className="btn btn-dark d-inline-block d-lg-none ml-auto"
+					type="button"
+					data-toggle="collapse"
+					data-target="#navbarSupportedContent"
+					aria-controls="navbarSupportedContent"
+					aria-expanded="false"
+					aria-label="Toggle navigation"
 				>
 					<i className="fas fa-align-justify"></i>
 				</button>
