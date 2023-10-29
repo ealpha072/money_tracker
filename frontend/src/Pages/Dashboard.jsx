@@ -31,6 +31,18 @@ const Dashboard = () => {
 
 
                 </div>
+
+                <div className="mr-2 mb-2">
+                    <div className="header ml-2">
+                        <h2>RECENT TRANSACTIONS</h2>
+                    </div>
+
+                    <div className="card">
+                        <div className="mt-2 ml-2 mb-2">
+                            29 Oct Standard Chatered ---Alpha Transfer to me 200.00USD
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 

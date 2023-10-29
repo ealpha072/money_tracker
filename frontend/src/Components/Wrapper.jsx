@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 
 const Wrapper = ({componentProp}) => {
   return (
@@ -11,16 +12,16 @@ const Wrapper = ({componentProp}) => {
 
 			<ul className="list-unstyled components">
 				<li className="active">
-					<a href="#"> <i className="fa fa-user"></i> Dashboard</a>
+					<Link to={"/"}> <i className="fa fa-user"></i> Dashboard</Link>
 				</li>
 				<li>
-					<a href="#"> <i className="fa fa-usd"></i> Transactions</a>
+					<Link to={"/transactions"}> <i className="fa fa-usd"></i> Transactions</Link>
 				</li>
 				<li>
-					<a href="#"> <i className="fa fa-credit-card"></i> Accounts</a>
+					<Link to={"/account"}> <i className="fa fa-credit-card"></i> Accounts</Link>
 				</li>
 				<li>
-					<a href="#"> <i className="fa fa-cogs"></i> Settings</a>
+					<Link to={"/settings"}> <i className="fa fa-cogs"></i> Settings</Link>
 				</li>
 			</ul>
       	</nav>
