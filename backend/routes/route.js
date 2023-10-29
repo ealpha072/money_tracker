@@ -4,7 +4,7 @@ import User from "../models/user.js";
 const appRoute = express.Router();
 
 appRoute.get("/", (req, res) => {
-  res.send("Good morning Africa");
+  res.send("<h1>Good morning Africa</h1>");
 });
 
 export default appRoute;
