@@ -52,9 +52,9 @@ const Wrapper = ({componentProp}) => {
 				>
 					<ul className="nav navbar-nav ml-auto">
 						<li className="nav-item active">
-							<a className="nav-link" href="#">
-								Page
-							</a>
+							<Link to={"/account"} className="nav-link" href="#">
+								Account
+							</Link>
 						</li>
 					</ul>
 				</div>

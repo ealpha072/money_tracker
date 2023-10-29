@@ -28,8 +28,6 @@ const Dashboard = () => {
                         transfer="Transfer"
                         buttonText="Add Income" 
                     />
-
-
                 </div>
 
                 <div className="mr-2 mb-2">
