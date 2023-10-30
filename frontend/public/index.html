@@ -32,6 +32,10 @@
             $('#sidebarCollapse').on('click', function () {
                 $('#sidebar').toggleClass('active');
             });
+
+			$('#dropdownInput').on('focus', function() {
+        		$('#dropdownButton').dropdown('toggle');
+    		});
         });
     </script>
   </body>
