@@ -1,36 +1,68 @@
 import { Link } from "react-router-dom";
+import useForm from "../hooks/Forms";
+
+
 const Login = () => {
-  return (
-    <div class="container h-100 loginDiv">
-        <div class="row h-100 justify-content-center align-items-center ">
-            <div class="col-sm-6">
-                <h2 class="text-center">Login</h2>
-                <form>
-                    <div class="input-group input-group-lg mb-3">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text" id="basic-addon1"><i className="fa fa-user"></i></span>
-                        </div>
-                        <input type="email" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1" />
-                    </div>
+    const initialState = {
+        email:"",
+        password:"",
+    }
 
-                    <div class="input-group input-group-lg mb-3">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text" id="basic-addon1"><i className="fa fa-unlock"></i></span>
-                        </div>
-                        <input type="password" class="form-control" placeholder="Password" aria-label="Username" aria-describedby="basic-addon1" />
-                    </div>
+    const onSubmit = (formData) => {
+        console.log(formData)
+    }
 
-                    <div className="mt-4 mb-4">
-                        <small id="passwordHelpInline" class="text-muted">
-                            No, account ? <Link to={"/signup"} className="text-success">Signup</Link>
-                        </small>
-                    </div>
-                   
-                    <button type="submit" class="btn btn-block btn-primary">Submit</button>
-                </form>
+    const {formData, handleInputChange, handleSubmit} = useForm(initialState, onSubmit)
+
+    return (
+        <div className="container h-100 loginDiv">
+            <div className="row h-100 justify-content-center align-items-center ">
+                <div className="col-sm-6">
+                    <h2 className="text-center">Login</h2>
+                    <form onSubmit={handleSubmit}>
+                        <div className="input-group input-group-lg mb-3">
+                            <div className="input-group-prepend">
+                                <span className="input-group-text" id="basic-addon1"><i className="fa fa-user"></i></span>
+                            </div>
+                            <input 
+                                type="email" 
+                                className="form-control" 
+                                placeholder="Email Address" 
+                                aria-label="Username" 
+                                aria-describedby="basic-addon1" 
+                                name="email"
+                                value={formData.email}
+                                onChange={handleInputChange}
+                            />
+                        </div>
+
+                        <div className="input-group input-group-lg mb-3">
+                            <div className="input-group-prepend">
+                                <span className="input-group-text" id="basic-addon1"><i className="fa fa-unlock"></i></span>
+                            </div>
+                            <input 
+                                type="password" 
+                                className="form-control" 
+                                placeholder="Password" 
+                                aria-label="Username" 
+                                aria-describedby="basic-addon1" 
+                                name="password"
+                                value={formData.password}
+                                onChange={handleInputChange}
+                            />
+                        </div>
+
+                        <div className="mt-4 mb-4">
+                            <small id="passwordHelpInline" className="text-muted">
+                                No, account ? <Link to={"/signup"} className="text-success">Signup</Link>
+                            </small>
+                        </div>
+                    
+                        <button type="submit" className="btn btn-block btn-primary">Submit</button>
+                    </form>
+                </div>
             </div>
         </div>
-    </div>
   )
 };
 
