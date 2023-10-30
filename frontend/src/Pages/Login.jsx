@@ -10,7 +10,7 @@ const Login = () => {
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="basic-addon1"><i className="fa fa-user"></i></span>
                         </div>
-                        <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1" />
+                        <input type="email" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1" />
                     </div>
 
                     <div class="input-group input-group-lg mb-3">
@@ -22,7 +22,7 @@ const Login = () => {
 
                     <div className="mt-4 mb-4">
                         <small id="passwordHelpInline" class="text-muted">
-                            No, account ? <Link to={"/"} className="text-success">Signup</Link>
+                            No, account ? <Link to={"/signup"} className="text-success">Signup</Link>
                         </small>
                     </div>
                    

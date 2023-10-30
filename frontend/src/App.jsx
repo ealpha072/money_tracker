@@ -7,6 +7,7 @@ import Dashboard from './Pages/Dashboard';
 import Transactions from './Pages/Transactions';
 import Settings from './Pages/Settings';
 import Login from './Pages/Login';
+import Signup from './Pages/Signup';
 
 const App = () => {
   return (
@@ -14,6 +15,7 @@ const App = () => {
       	<Router>
         	<Routes>
 				<Route path='/' element={<Login />}></Route>
+				<Route path='/signup' element={<Signup />}></Route>
 				<Route path='/dashboard' element={<Wrapper componentProp={<Dashboard />}/>}></Route>
             	<Route path='/account' element={<Wrapper componentProp={<Accounts />}/>}></Route>
 				<Route path='/transactions' element={<Wrapper componentProp={<Transactions />}/>}></Route>
