@@ -1,45 +1,86 @@
 import { Link } from "react-router-dom"
+import useForm from "../hooks/Forms"
 
 const Signup = () => {
-  return (
-    <div class="container h-100 loginDiv">
-        <div class="row h-100 justify-content-center align-items-center ">
-            <div class="col-sm-6">
-                <h2 class="text-center">Signup</h2>
-                <form>
-                    <div class="input-group input-group-lg mb-3">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text" id="basic-addon1"><i className="fa fa-user"></i></span>
-                        </div>
-                        <input type="email" class="form-control" placeholder="Email address" aria-label="Username" aria-describedby="basic-addon1" />
-                    </div>
 
-                    <div class="input-group input-group-lg mb-3">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text" id="basic-addon1"><i className="fa fa-unlock"></i></span>
-                        </div>
-                        <input type="password" class="form-control" placeholder="Password" aria-label="Username" aria-describedby="basic-addon1" />
-                    </div>
+    const initialState = {
+        email:"",
+        password:"",
+        confirmPassword:""
+    }
 
-                    <div class="input-group input-group-lg mb-3">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text" id="basic-addon1"><i className="fa fa-unlock"></i></span>
-                        </div>
-                        <input type="password" class="form-control" placeholder="Confirm Password" aria-label="Username" aria-describedby="basic-addon1" />
-                    </div>
+    const onSubmit = (formData) => {
+        console.log(formData)
+    }
 
-                    <div className="mt-4 mb-4">
-                        <small id="passwordHelpInline" class="text-muted">
-                           Have an account ? <Link to={"/"} className="text-success">Login</Link>
-                        </small>
-                    </div>
-                   
-                    <button type="submit" class="btn btn-block btn-primary">Submit</button>
-                </form>
+    const {formData, handleInputChange, handleSubmit} = useForm(initialState, onSubmit)
+
+    return (
+        <div className="container h-100 loginDiv">
+            <div className="row h-100 justify-content-center align-items-center ">
+                <div className="col-sm-6">
+                    <h2 className="text-center">Signup</h2>
+                    <form onSubmit={handleSubmit}>
+                        <div className="input-group input-group-lg mb-3">
+                            <div className="input-group-prepend">
+                                <span className="input-group-text" id="basic-addon1"><i className="fa fa-user"></i></span>
+                            </div>
+                            <input 
+                                type="email" 
+                                name="email" 
+                                className="form-control" 
+                                placeholder="Email address" 
+                                aria-label="Username" 
+                                aria-describedby="basic-addon1" 
+                                value={formData.email}
+                                onChange={handleInputChange}
+                            />
+                        </div>
+
+                        <div className="input-group input-group-lg mb-3">
+                            <div className="input-group-prepend">
+                                <span className="input-group-text" id="basic-addon1"><i className="fa fa-unlock"></i></span>
+                            </div>
+                            <input 
+                                type="password" 
+                                name="password" 
+                                className="form-control" 
+                                placeholder="Password" 
+                                aria-label="Username" 
+                                aria-describedby="basic-addon1" 
+                                value={formData.password}
+                                onChange={handleInputChange}
+                            />
+                        </div>
+
+                        <div className="input-group input-group-lg mb-3">
+                            <div className="input-group-prepend">
+                                <span className="input-group-text" id="basic-addon1"><i className="fa fa-unlock"></i></span>
+                            </div>
+                            <input 
+                                type="password" 
+                                name="confirmPassword" 
+                                className="form-control" 
+                                placeholder="Confirm Password" 
+                                aria-label="Username" 
+                                aria-describedby="basic-addon1" 
+                                value={formData.confirmPassword}
+                                onChange={handleInputChange}
+                            />
+                        </div>
+
+                        <div className="mt-4 mb-4">
+                            <small id="passwordHelpInline" className="text-muted">
+                            Have an account ? <Link to={"/"} className="text-success">Login</Link>
+                            </small>
+                        </div>
+                    
+                        <button type="submit" className="btn btn-block btn-primary">Submit</button>
+                    </form>
+                </div>
             </div>
         </div>
-    </div>
-  )
+    )
 }
 
 export default Signup
