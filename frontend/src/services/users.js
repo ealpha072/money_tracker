@@ -6,9 +6,7 @@ const signup = async (data) => {
     const request = axios.post(`${baseUrl}/signup`, data)
     const response = await request
     return response.data
-
 }
-
 
 const login = async (data) => {
     const request = axios.post(`${baseUrl}/login`, data)

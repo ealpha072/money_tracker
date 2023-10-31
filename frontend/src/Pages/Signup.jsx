@@ -1,7 +1,9 @@
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import useForm from "../hooks/Forms"
+import userService from "../services/users"
 
 const Signup = () => {
+    const navigate = useNavigate()
 
     const initialState = {
         email:"",
@@ -11,6 +13,14 @@ const Signup = () => {
 
     const onSubmit = (formData) => {
         console.log(formData)
+        userService.signup(formData)
+        .then(response => {
+            console.log(response)
+            navigate("/")
+        }).catch(error => {
+            console.log(error)
+        }
+        )
     }
 
     const {formData, handleInputChange, handleSubmit} = useForm(initialState, onSubmit)

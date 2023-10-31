@@ -1,8 +1,10 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import useForm from "../hooks/Forms";
-
+import userService from "../services/users";
 
 const Login = () => {
+    const navigate = useNavigate()
+
     const initialState = {
         email:"",
         password:"",
@@ -10,6 +12,15 @@ const Login = () => {
 
     const onSubmit = (formData) => {
         console.log(formData)
+        userService.login(formData)
+        .then(response => {
+            console.log(response)
+            navigate("/dashboard")
+        }).catch(error => {
+            console.log(error)
+        }
+        )
+
     }
 
     const {formData, handleInputChange, handleSubmit} = useForm(initialState, onSubmit)
