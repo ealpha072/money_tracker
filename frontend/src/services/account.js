@@ -9,7 +9,7 @@ const addAccount = async (data) => {
 }
 
 const editAccount = async (data) => {
-    return null;
+    return data;
 }
 
 const accountService = {addAccount, editAccount}

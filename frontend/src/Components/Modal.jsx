@@ -1,4 +1,5 @@
 import useForm from "../hooks/Forms"
+import accountService from "../services/account"
 
 const Modal = () => {
     const initialState = {
@@ -9,6 +10,9 @@ const Modal = () => {
 
     const onSubmit = (formData) => {
         console.log(formData)
+        accountService.addAccount(formData)
+        .then(response => console.log(response))
+        .catch(error => console.log(error))
     }
 
     const {formData, handleInputChange, handleSubmit} = useForm(initialState, onSubmit)
