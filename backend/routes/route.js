@@ -1,6 +1,7 @@
 import express from "express";
 import User from "../models/user.js";
-//import bcrypt from "bcryptjs";
+import bcrypt from "bcryptjs";
+
 const appRoute = express.Router();
 
 appRoute.get("/", (req, res) => {
@@ -8,8 +9,8 @@ appRoute.get("/", (req, res) => {
 });
 
 appRoute.post("/signup", async (req, res, next) => {
-  //console.log(req.body)
-  const {email, password} = req.body
+    //console.log(req.body)
+    const {email, password} = req.body
   	try {
 		//see if user allready exists
 		const user = await User.findOne({email:email})
@@ -25,9 +26,9 @@ appRoute.post("/signup", async (req, res, next) => {
 			res.status(400).json({message:"Email already taken"})
 		}
   	} catch (error) {
-      logger.error(error.message)
-      next(error)
-  }
+        logger.error(error.message)
+        next(error)
+    }
 })
 
 appRoute.post('/login', async (req, res, next) => {

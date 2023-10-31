@@ -1,13 +1,12 @@
 import mongoose from "mongoose";
 
 const userSchema = new mongoose.Schema({
-  username: String,
   email: {
     type: String,
     required: [true, "Cannot be blank"],
     unique: true,
   },
-  passwordHash: String,
+  passwordHash: String
 });
 
 userSchema.set("toJSON", {
@@ -20,5 +19,5 @@ userSchema.set("toJSON", {
   },
 });
 
-const User = mongoose.model("user", userSchema);
+const User = mongoose.model("users", userSchema);
 export default User;
