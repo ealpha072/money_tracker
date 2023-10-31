@@ -26,8 +26,9 @@ const Dashboard = () => {
 
                     <Form 
                         transfer="Transfer"
-                        buttonText="Add Income" 
+                        buttonText="Add Income"
                     />
+                    
                 </div>
 
                 <div className="mr-2 mb-2">

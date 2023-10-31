@@ -1,6 +1,18 @@
-import React from 'react'
+import useForm from "../hooks/Forms"
 
 const Modal = () => {
+    const initialState = {
+        accountname: '',
+        group: '',
+        balance: '',
+    }
+
+    const onSubmit = (formData) => {
+        console.log(formData)
+    }
+
+    const {formData, handleInputChange, handleSubmit} = useForm(initialState, onSubmit)
+
     return (
         <div className="modal fade" id="accountModal" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div className="modal-dialog modal-dialog-centered" role="document">
@@ -12,43 +24,48 @@ const Modal = () => {
                         </button>
                     </div>
                     <div className="modal-body">
-                        <form action="">
+                        <form action="" onSubmit={handleSubmit}>
                             <div className="form-row">
                                 <div className="col">
-                                    <label htmlFor="Account_name">Name</label>
-                                    <input type="text" className="form-control" placeholder="First name" />
+                                    <label htmlFor="Account_name">Account Name</label>
+                                    <input 
+                                        type="text" 
+                                        className="form-control" 
+                                        placeholder="Account name" 
+                                        name="accountname"
+                                        value={formData.accountname}
+                                        onChange={handleInputChange}
+                                    />
 
-                                    <div className="form-check mt-4">
-                                        <input className="form-check-input" type="checkbox" value="" id="defaultCheck1" />
-                                        <label className="form-check-label" htmlFor="defaultCheck1">
-                                            Default checkbox
-                                        </label>
-                                    </div>
-                                    <div className="form-check mt-4">
-                                        <input className="form-check-input" type="checkbox" value="" id="defaultCheck1" />
-                                        <label className="form-check-label" htmlFor="defaultCheck1">
-                                            Show on dashboard
-                                        </label>
-                                    </div>
+                                    
                                 </div>
                                 <div className="col">
                                     <label htmlFor="Account_name">Group</label>
-                                    <select className="custom-select" id="inputGroupSelect01">
+                                    <select className="custom-select" id="inputGroupSelect01" onChange={handleInputChange}>
                                         <option defaultValue>Choose...</option>
-                                        <option value="1">Cahs</option>
-                                        <option value="2">Bank Account</option>
-                                        <option value="3">Deposit</option>
+                                        <option value="Cash">Cash</option>
+                                        <option value="Bank Account">Bank Account</option>
+                                        <option value="Deposit">Deposit</option>
                                     </select>
 
                                     
                                     <div className="input-group mb-2 mt-4">
-                                        <input type="text" className="form-control" id="inlineFormInputGroup" placeholder="Balance" />
+                                        <input 
+                                            type="text" 
+                                            className="form-control" 
+                                            id="inlineFormInputGroup" 
+                                            placeholder="Balance" 
+                                            name="balance"
+                                            value={formData.balance}
+                                            onChange={handleInputChange}
+                                        />
+
                                         <div className="input-group-append">
                                             <div className="input-group-text"><strong>USD</strong></div>
                                         </div>
                                     </div>
 
-                                    <button type="button" className="btn btn-block btn-primary">Save changes</button>
+                                    <button type="submit" className="btn btn-block btn-primary">Save changes</button>
                                 </div>
                             </div>
                         </form>

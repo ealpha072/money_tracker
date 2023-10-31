@@ -1,8 +1,10 @@
-import React from "react";
+import useForm from "../hooks/Forms";
 
 const Form = (props) => {
+    
+
     return (
-        <form action="" className="mt-4">
+        <form action="" className="mt-4" onSubmit={props.onSubmit}>
             <div className="form-row">
                 <div class="col-9">
                     <label htmlFor="Account_name">From</label>

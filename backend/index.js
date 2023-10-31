@@ -5,6 +5,7 @@ import cors from "cors";
 import logger from "./utils/logger.js";
 import middlelware from "./utils/middleware.js";
 import appRoute from "./routes/route.js";
+import accountRoute from "./routes/account_routes.js";
 
 const app = express();
 app.use(cors())
@@ -29,6 +30,8 @@ mongoose
 app.use(express.json());
 app.use(middlelware.requestLogger);
 app.use("/user", appRoute);
+app.use("/account", accountRoute);
+
 
 app.use(middlelware.unknownEndpoint);
 app.use(middlelware.errorHandler);
