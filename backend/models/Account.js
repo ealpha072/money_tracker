@@ -3,7 +3,6 @@ import mongoose from "mongoose";
 const accountSchema = new mongoose.Schema({
     user_id: {
         type: mongoose.Schema.Types.ObjectId,
-        ref:"User",
         require:true
     },
     accountname:{type: String, unique:true},
