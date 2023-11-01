@@ -14,9 +14,9 @@ const Transmodal = () => {
                     </div>
                     <div className="modal-body">
                         <div className="row">
-                            <div className="col">Expenses</div>
-                            <div className="col">Transfer</div>
-                            <div className="col">Income</div>
+                            <div className="col bg-light pt-4 pb-4 border-right">Expenses</div>
+                            <div className="col bg-light pt-4 pb-4 border-right">Transfer</div>
+                            <div className="col bg-light pt-4 pb-4">Income</div>
                         </div>
                         
                         <Form transfer="Transfer" buttonText="Create Account" />

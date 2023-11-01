@@ -3,7 +3,7 @@ import Form from "../Components/Form"
 const Dashboard = () => {
     const userInfo = JSON.parse(localStorage.getItem("userInfo"))
     console.log(userInfo)
-    
+
     return (
         <div className="card">
             <div className="row">
@@ -20,18 +20,18 @@ const Dashboard = () => {
                     <div className="mt-4 ml-2">
                         <h4>NET WORTH</h4>
                     </div>
-                    <div className="card-body border rounded mr-2 mb-4">
-                        <div className="row border-bottom">
-                            <div className="col">Expenses</div>
-                            <div className="col">Expenses</div>
-                            <div className="col">Expenses</div>
+                    <div className="card-body border rounded mr-2 mb-4 networthCard">
+                        <div className="row border-bottom ">
+                            <div className="col bg-light pt-4 pb-4 border-right">Expenses</div>
+                            <div className="col bg-light pt-4 pb-4 border-right">Expenses</div>
+                            <div className="col bg-light pt-4 pb-4">Expenses</div>
                         </div>
 
                         <Form 
                             transfer="Transfer"
                             buttonText="Add Income"
                         />
-                        
+
                     </div>
 
                     <div className="mr-2 mb-2">

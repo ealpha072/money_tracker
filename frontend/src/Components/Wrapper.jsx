@@ -12,7 +12,7 @@ const Wrapper = ({componentProp}) => {
 
 			<ul className="list-unstyled components">
 				<li className="active">
-					<Link to={"/"}> <i className="fa fa-user"></i> Dashboard</Link>
+					<Link to={"/dashboard"}> <i className="fa fa-user"></i> Dashboard</Link>
 				</li>
 				<li>
 					<Link to={"/transactions"}> <i className="fa fa-usd"></i> Transactions</Link>
