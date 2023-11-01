@@ -2,7 +2,11 @@ import useForm from "../hooks/Forms"
 import accountService from "../services/account"
 
 const Modal = () => {
+    const userId = JSON.parse(localStorage.getItem("userInfo"))._id
+    console.log(userId)
+    
     const initialState = {
+        user_id: userId,
         accountname: '',
         group: '',
         balance: '',
@@ -45,14 +49,19 @@ const Modal = () => {
                                 </div>
                                 <div className="col">
                                     <label htmlFor="Account_name">Group</label>
-                                    <select className="custom-select" id="inputGroupSelect01" onChange={handleInputChange}>
+                                    <select 
+                                        className="custom-select" 
+                                        id="inputGroupSelect01" 
+                                        onChange={handleInputChange} 
+                                        name="group"
+                                        value={formData.group}
+                                    >
                                         <option defaultValue>Choose...</option>
                                         <option value="Cash">Cash</option>
                                         <option value="Bank Account">Bank Account</option>
                                         <option value="Deposit">Deposit</option>
                                     </select>
 
-                                    
                                     <div className="input-group mb-2 mt-4">
                                         <input 
                                             type="text" 

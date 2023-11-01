@@ -15,6 +15,8 @@ const Login = () => {
         userService.login(formData)
         .then(response => {
             console.log(response)
+            const userInfo = JSON.stringify(response.user)
+            localStorage.setItem("userInfo", userInfo)
             navigate("/dashboard")
         }).catch(error => {
             console.log(error)

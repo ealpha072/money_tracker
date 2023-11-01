@@ -1,16 +1,14 @@
 import mongoose from "mongoose";
 
 const accountSchema = new mongoose.Schema({
-    id: {
+    user_id: {
         type: mongoose.Schema.Types.ObjectId,
-        ref:"User"
+        ref:"User",
+        require:true
     },
-    email:String,
-    account_details:{
-        accountName:String,
-        balance: Number
-    }
-
+    accountname:{type: String, unique:true},
+    group:String,
+    balance: String
 })
 
 const Account = mongoose.model("Account_details", accountSchema)
