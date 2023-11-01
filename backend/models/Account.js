@@ -5,7 +5,7 @@ const accountSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         require:true
     },
-    accountname:{type: String, unique:true},
+    accountname:{type: String},
     group:String,
     balance: String
 })
