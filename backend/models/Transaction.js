@@ -5,11 +5,15 @@ const transactionSchema = new mongoose.Schema({
         type:mongoose.Schema.Types.ObjectId,
         require: true
     },
+    transactionType: String,
     from: {type: String, require:true},
     to:{type: String, require:true},
     note:String,
     amount:String,
-    date:Date
+    date:{
+        type: Date, 
+        default: ()=>new Date.now()
+    }
 })
 
 const Transaction =  mongoose.model("transactions", transactionSchema)

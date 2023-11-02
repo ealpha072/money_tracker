@@ -5,14 +5,25 @@ const Form = (props) => {
     const userId = JSON.parse(localStorage.getItem("userInfo"))._id
     //console.log(props.active)
 
+    const getCurrentDate = () => {
+        const today = new Date();
+        const year = today.getFullYear();
+        const month = String(today.getMonth() + 1).padStart(2, '0'); // Add 1 to month because it's zero-based
+        const day = String(today.getDate()).padStart(2, '0');
+        return `${year}-${month}-${day}`;
+    }
+
     const initialState = {
         user_id: userId,
+        transactionType: props.active,
         from: "",
         to: "",
         amount: "",
         date: "",
         note: "",
     }
+
+    const currentDate = new Date()
 
     const onSubmit = (formData) => {
         console.log(formData)
@@ -93,7 +104,7 @@ const Form = (props) => {
                                     placeholder="Amount"
                                     name="amount"
                                     value={formData.amount}
-                                    onChange={handleInputChange}
+                                    // onChange={handleInputChange}
                                     required
                                 />
                                 <div className="input-group-append">
@@ -126,7 +137,7 @@ const Form = (props) => {
                     <label htmlFor="Account_name">Date</label>
                     <input
                         type="date"
-                        defaultValue={"2023-10-29"}
+                        //defaultValue={getCurrentDate()}
                         className="form-control"
                         placeholder="Balance"
                         name="date"
