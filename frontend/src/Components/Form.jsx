@@ -3,7 +3,8 @@ import transactService from "../services/transact";
 
 const Form = (props) => {
     const userId = JSON.parse(localStorage.getItem("userInfo"))._id
-    
+    //console.log(props.active)
+
     const initialState = {
         user_id: userId,
         from: "",
@@ -66,7 +67,7 @@ const Form = (props) => {
             </div>
 
             {
-                props.transfer ? (
+                props.active === "Transfer" ? (
                     <div className="form-row mt-4">
                         <div className="col-9">
                             <label htmlFor="Account_name">To</label>

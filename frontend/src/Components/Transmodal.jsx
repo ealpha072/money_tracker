@@ -53,7 +53,8 @@ const Transmodal = () => {
                                 </ul>
                             </div>
                             
-                            <Form transfer="Transfer" buttonText="Create Account" />
+                            <Form active={activeLink} buttonText="Create Account" />
+                            
                         </div>
                         <div className="modal-footer">
                             

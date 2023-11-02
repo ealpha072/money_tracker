@@ -1,6 +1,14 @@
+import { useState } from "react"
 import Form from "../Components/Form"
+import { Link } from "react-router-dom"
 
 const Dashboard = () => {
+    const [activeLink, setActiveLink] = useState("Expense")
+
+    const handleLinkClick = (linkname) => {
+        setActiveLink(linkname)
+    }
+
     const userInfo = JSON.parse(localStorage.getItem("userInfo"))
     console.log(userInfo)
 
@@ -21,14 +29,40 @@ const Dashboard = () => {
                         <h4>NET WORTH</h4>
                     </div>
                     <div className="card-body border rounded mr-2 mb-4 networthCard">
-                        <div className="row border-bottom ">
-                            <div className="col bg-light pt-4 pb-4 border-right">Expenses</div>
-                            <div className="col bg-light pt-4 pb-4 border-right">Expenses</div>
-                            <div className="col bg-light pt-4 pb-4">Expenses</div>
-                        </div>
+                    <div className="row nav-link-div">
+                                <ul className="nav nav-tabs row" role="tablist">
+                                    <li className="nav-item col">
+                                        <Link 
+                                            className={`nav-link text-danger ${activeLink === "Expense" ? 'active' : ''}`} 
+                                            href="#" 
+                                            onClick={() => handleLinkClick("Expense")}
+                                        >
+                                            Expense
+                                        </Link>
+                                    </li>
+                                    <li className="nav-item col">
+                                        <Link 
+                                            className={`nav-link ${activeLink === "Transfer" ? 'active' : ''}`}
+                                            href="#" 
+                                            onClick={() => handleLinkClick("Transfer")}
+                                        >
+                                            Transfer
+                                        </Link>
+                                    </li>
+                                    <li className="nav-item col">
+                                        <Link 
+                                            className={`nav-link text-success ${activeLink === "Income" ? 'active' : ''}`}
+                                            href="#" 
+                                            onClick={() => handleLinkClick("Income")}
+                                        >
+                                            Income
+                                        </Link>
+                                    </li>
+                                </ul>
+                            </div>
 
                         <Form 
-                            transfer="Transfer"
+                            active={activeLink}
                             buttonText="Add Income"
                         />
 
