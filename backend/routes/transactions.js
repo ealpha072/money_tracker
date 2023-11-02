@@ -5,7 +5,15 @@ import logger from "../utils/logger.js";
 const transactRoute = express.Router()
 
 transactRoute.post("/transfer", async(req, res, next) => {
-    res.status(200).json({message: "This works"})
+    const {user_id, from, to, note, amount, date} = req.body
+    try {
+        const newTransaction = new Transaction({user_id, from, to, note, amount, date})
+        const savedTransaction = await newTransaction.save()
+        res.status(201).json({message: "Transaction added successful", transactionDetails:savedTransaction})
+    } catch (error) {
+        logger.error(error)
+        next(error)
+    }
 })
 
 export default transactRoute

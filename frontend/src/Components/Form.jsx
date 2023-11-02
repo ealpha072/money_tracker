@@ -2,7 +2,10 @@ import useForm from "../hooks/Forms";
 import transactService from "../services/transact";
 
 const Form = (props) => {
+    const userId = JSON.parse(localStorage.getItem("userInfo"))._id
+    
     const initialState = {
+        user_id: userId,
         from: "",
         to: "",
         amount: "",
