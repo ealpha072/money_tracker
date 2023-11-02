@@ -1,37 +1,43 @@
 import useForm from "../hooks/Forms";
+import transactService from "../services/transact";
 
 const Form = (props) => {
     const initialState = {
-        name: "",
+        from: "",
+        to: "",
         amount: "",
-        category: "",
         date: "",
-        type: "",
         note: "",
     }
 
     const onSubmit = (formData) => {
         console.log(formData)
+        transactService.transfer(formData)
+        .then(response => {
+            console.log(response)
+        }).catch(error => {
+            console.log(error)
+        }
+        )
     }
-    
+
     const {formData, handleInputChange, handleSubmit} = useForm(initialState, onSubmit)
 
     return (
         <form action="" className="mt-4" onSubmit={handleSubmit}>
             <div className="form-row">
-                <div class="col-9">
+                <div className="col-9">
                     <label htmlFor="Account_name">From</label>
                     <select 
-                        class="custom-select" 
-                        id="inputGroupSelect01" 
+                        className="custom-select" 
                         name="from"
                         onChange={handleInputChange}
                         value={formData.from}
+                        required
                     >
-                        <option selected>Choose...</option>
-                        <option value="1">Cash</option>
-                        <option value="2">Bank Account</option>
-                        <option value="3">Deposit</option>
+                        <option defaultValue={""}>Choose...</option>
+                        <option value="Alpha">Alpha</option>
+                        <option value="Savings Account">Savings Account</option>
                     </select>
                 </div>
 
@@ -40,15 +46,15 @@ const Form = (props) => {
                     <div className="input-group">
                         <input
                             type="text"
-                            class="form-control form-control-md"
-                            id="inlineFormInputGroup"
-                            placeholder="Balance"
+                            className="form-control form-control-md"
+                            placeholder="Amount"
                             name="amount"
                             value={formData.amount}
                             onChange={handleInputChange}
+                            required
                         />
-                        <div class="input-group-append">
-                            <div class="input-group-text">
+                        <div className="input-group-append">
+                            <div className="input-group-text">
                                 <strong>USD</strong>
                             </div>
                         </div>
@@ -59,19 +65,18 @@ const Form = (props) => {
             {
                 props.transfer ? (
                     <div className="form-row mt-4">
-                        <div class="col-9">
+                        <div className="col-9">
                             <label htmlFor="Account_name">To</label>
                             <select 
-                                class="custom-select" 
-                                id="inputGroupSelect01"
+                                className="custom-select" 
                                 name="to"
                                 onChange={handleInputChange}
                                 value={formData.to}
+                                required
                             >
-                                <option selected>Choose...</option>
-                                <option value="Cash">Cash</option>
-                                <option value="Bank Account">Bank Account</option>
-                                <option value="Deposit">Deposit</option>
+                                <option defaultValue={""}>Choose...</option>
+                                <option value="Cash">Alpha</option>
+                                <option value="Standard Chatered">Standard Chatered</option>
                             </select>
                         </div>
 
@@ -80,15 +85,15 @@ const Form = (props) => {
                             <div className="input-group">
                                 <input
                                     type="text"
-                                    class="form-control form-control-md"
-                                    id="inlineFormInputGroup"
-                                    placeholder="Balance"
+                                    className="form-control form-control-md"
+                                    placeholder="Amount"
                                     name="amount"
                                     value={formData.amount}
                                     onChange={handleInputChange}
+                                    required
                                 />
-                                <div class="input-group-append">
-                                    <div class="input-group-text">
+                                <div className="input-group-append">
+                                    <div className="input-group-text">
                                         <strong>USD</strong>
                                     </div>
                                 </div>
@@ -101,13 +106,12 @@ const Form = (props) => {
             }
 
             <div className="form-row mt-4">
-                <div class="col-9">
+                <div className="col-9">
                     <label htmlFor="Account_name">Note</label>
                     <input
                         type="text"
-                        class="form-control"
-                        id="inlineFormInputGroup"
-                        placeholder="Balance"
+                        className="form-control"
+                        placeholder="Transaction Note"
                         name="note"
                         value={formData.note}
                         onChange={handleInputChange}
@@ -118,15 +122,14 @@ const Form = (props) => {
                     <label htmlFor="Account_name">Date</label>
                     <input
                         type="date"
-                        value={"2023-10-29"}
-                        class="form-control"
-                        id="inlineFormInputGroup"
+                        defaultValue={"2023-10-29"}
+                        className="form-control"
                         placeholder="Balance"
                         name="date"
                         onChange={handleInputChange}
                     />
 
-                    <button type="button" className="btn btn-block btn-primary mt-4">
+                    <button type="submit" className="btn btn-block btn-primary mt-4">
                         {props.buttonText}
                     </button>
                 </div>

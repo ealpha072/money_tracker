@@ -6,6 +6,7 @@ import logger from "./utils/logger.js";
 import middlelware from "./utils/middleware.js";
 import appRoute from "./routes/route.js";
 import accountRoute from "./routes/account_routes.js";
+import transactRoute from "./routes/transactions.js";
 
 const app = express();
 app.use(cors())
@@ -31,6 +32,7 @@ app.use(express.json());
 app.use(middlelware.requestLogger);
 app.use("/user", appRoute);
 app.use("/account", accountRoute);
+app.use("/transact", transactRoute)
 
 
 app.use(middlelware.unknownEndpoint);

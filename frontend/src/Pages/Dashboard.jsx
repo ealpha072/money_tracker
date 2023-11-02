@@ -12,7 +12,7 @@ const Dashboard = () => {
                         <h4>NET WORTH</h4>
                     </div>
                     <div className="card-body ml-4">
-                    
+
                     </div>
                 </div>
 
