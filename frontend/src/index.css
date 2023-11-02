@@ -26,4 +26,21 @@ body {
   padding-top: 0 !important;
 }
 
+.nav-tabs{
+  width: 100%;
+  margin: 0;
+}
+
+.nav-link-div{
+  margin: 0;
+}
+
+.nav-link-div > ul > li{
+  padding: 0;
+}
+
+.modal-card-body{
+  padding-top: 0;
+}
+
 
