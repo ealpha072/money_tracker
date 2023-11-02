@@ -10,10 +10,7 @@ const transactionSchema = new mongoose.Schema({
     to:{type: String, require:true},
     note:String,
     amount:String,
-    date:{
-        type: Date, 
-        default: ()=>new Date.now()
-    }
+    date:Date
 })
 
 const Transaction =  mongoose.model("transactions", transactionSchema)
