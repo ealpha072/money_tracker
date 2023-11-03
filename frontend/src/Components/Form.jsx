@@ -5,14 +5,6 @@ const Form = (props) => {
     const userId = JSON.parse(localStorage.getItem("userInfo"))._id
     //console.log(props.active)
 
-    const getCurrentDate = () => {
-        const today = new Date();
-        const year = today.getFullYear();
-        const month = String(today.getMonth() + 1).padStart(2, '0'); // Add 1 to month because it's zero-based
-        const day = String(today.getDate()).padStart(2, '0');
-        return `${year}-${month}-${day}`;
-    }
-
     const initialState = {
         user_id: userId,
         transactionType: props.active,
@@ -22,8 +14,6 @@ const Form = (props) => {
         date: "",
         note: "",
     }
-
-    const currentDate = new Date()
 
     const onSubmit = (formData) => {
         console.log(formData)
@@ -145,7 +135,7 @@ const Form = (props) => {
                     />
 
                     <button type="submit" className="btn btn-block btn-primary mt-4">
-                        {props.buttonText}
+                        {props.buttonText}  
                     </button>
                 </div>
             </div>
