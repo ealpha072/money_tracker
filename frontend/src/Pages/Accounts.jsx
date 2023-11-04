@@ -1,6 +1,23 @@
+import { useState, useEffect } from 'react'
+import accountService from '../services/account'
 import Modal from '../Components/Modal'
+import Accordion from '../Components/Accordion'
 
 const Accounts = () => {
+    const [accounts, setAccounts] = useState([])
+
+    useEffect(() => {
+        accountService.getAllAccounts()
+        .then(response => {
+            console.log(response.accounts)
+            setAccounts(response.accounts) 
+        }
+        ).catch(error => {
+            console.log(error)
+        }
+        )
+    }, [accounts])
+
     return (
         <div className="card">
             <div className="card-header">
@@ -10,8 +27,8 @@ const Accounts = () => {
                 </button>
             </div>
             <div className="card-body">
-                <h5 className="card-title">Special title treatment</h5>
-                <p className="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                <Accordion accounts={accounts}/>
+                
             </div>
 
             <Modal />
