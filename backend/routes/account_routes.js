@@ -36,7 +36,25 @@ accountRoute.post("/add", async (req, res, next) => {
 
 accountRoute.get("/getAll", async(req, res, next) => {
     try {
-        const allAccounts = await Account.find({});
+        //const allAccounts = await Account.find({});
+        const allAccounts  = await Account.aggregate([
+            {
+                $group: {
+
+                    _id: "$group",
+                    accounts: {
+                        $push:{
+                            accountname:"$accountname",
+                            balance: {$toDouble: "$balance"}
+                        }
+                    },
+                    totalBalance: {$sum: {$toDouble: "$balance"}}
+                }
+
+            },{
+                $sort: { _id: 1 }
+            }
+        ])
         res.status(200).json({accounts:allAccounts})
     } catch (error) {
         logger.error(error.message)

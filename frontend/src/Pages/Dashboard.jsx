@@ -1,17 +1,18 @@
 import { useState, useEffect } from "react"
 import Form from "../Components/Form"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import accountService from "../services/account"
 
 const Dashboard = () => {
+    //const navigate = useNavigate()
     const [activeLink, setActiveLink] = useState("Expense")
     const [accounts, setAccounts] = useState([])
 
     useEffect(() => {
         accountService.getAllAccounts()
         .then(response => {
-            console.log(response)
-            setAccounts(response.data) 
+            console.log(response.accounts)
+            setAccounts(response.accounts) 
         }
         ).catch(error => {
             console.log(error)
@@ -19,13 +20,23 @@ const Dashboard = () => {
         )
     }, [])
 
+    //console.log(accounts)
+
 
     const handleLinkClick = (linkname) => {
         setActiveLink(linkname)
     }
 
-    const userInfo = JSON.parse(localStorage.getItem("userInfo"))
-    console.log(userInfo)
+    const generateRandomString = (length) => {
+        const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+        let result = '';
+      
+        for (let i = 0; i < length; i++) {
+          const randomIndex = Math.floor(Math.random() * characters.length);
+          result += characters.charAt(randomIndex);
+        }
+        return result;
+      }
 
     return (
       <div className="card">
@@ -36,36 +47,34 @@ const Dashboard = () => {
             </div>
             <div className="card-body ml-4">
                 <div id="accordion">
-                    <div class="card">
-                        <div class="card-header" id="headingOne">
-                            <h5 class="mb-0">
-                                <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                Collapsible Group Item #1
-                                </button>
-                            </h5>
-                        </div>
-
-                        <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
-                            <div class="card-body">
-                                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, .
+                    {accounts.map(account => {
+                        const randomString = generateRandomString(7)
+                        
+                        return (
+                            <div className="card" key={account._id}>
+                                <div className="card-header" id="headingOne">
+                                    <h5 className="mb-0">
+                                        <button className="btn btn-link" data-toggle="collapse" data-target={`#${randomString}`} aria-expanded="true" aria-controls={randomString}>
+                                            {account._id}
+                                        </button>
+                                        {account.totalBalance}
+                                    </h5>
+                                </div>
+                                <div id={randomString} className="collapse" aria-labelledby="headingOne" data-parent="#accordion" key={account.name}>
+                                    <div className="card-body">
+                                        {
+                                            account.accounts.map(singleAccount => {
+                                                return (
+                                                    <h6 key={singleAccount.accountname}>{singleAccount.accountname} <span>{singleAccount.balance}</span></h6>
+                                                )
+                                            })
+                                        }
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-
-                    <div class="card">
-                        <div class="card-header" id="headingTwo">
-                        <h5 class="mb-0">
-                            <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                            Collapsible Group Item #2
-                            </button>
-                        </h5>
-                        </div>
-                        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
-                        <div class="card-body">
-                            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad.
-                        </div>
-                        </div>
-                    </div>
+                        )
+                    }
+                    )} 
 
                 </div>
             </div>
