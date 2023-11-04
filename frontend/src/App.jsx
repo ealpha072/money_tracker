@@ -8,6 +8,7 @@ import Transactions from './Pages/Transactions';
 import Settings from './Pages/Settings';
 import Login from './Pages/Login';
 import Signup from './Pages/Signup';
+import Logout from './Pages/Logout';
 
 const App = () => {
   return (
@@ -20,6 +21,7 @@ const App = () => {
             	<Route path='/account' element={<Wrapper componentProp={<Accounts />}/>}></Route>
 				<Route path='/transactions' element={<Wrapper componentProp={<Transactions />}/>}></Route>
 				<Route path='/settings' element={<Wrapper componentProp={<Settings />}/>}></Route>
+				<Route path='/logout' element={<Logout />}></Route>
         	</Routes>
       	</Router>
     </div>

@@ -8,5 +8,11 @@ const transfer = async (data) => {
     return response.data
 }
 
-const transactService = {transfer}
+const getTransactions = async () =>{
+    const request = axios.get(`${baseUrl}/getAll`)
+    const response = await request
+    return response.data
+}
+
+const transactService = {transfer, getTransactions}
 export default transactService

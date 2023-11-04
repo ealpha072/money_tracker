@@ -16,7 +16,7 @@ const Accounts = () => {
             console.log(error)
         }
         )
-    }, [accounts])
+    }, [])
 
     return (
         <div className="card">
