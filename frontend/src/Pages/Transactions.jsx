@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom"
 import Transmodal from "../Components/Transmodal"
-import Accordion from "../Components/Accordion"
+import Translist from "../Components/Translist"
 
 const Transactions = () => {
 
@@ -31,8 +31,7 @@ const Transactions = () => {
                 </div>
                 <div className="card-body">
                     {/* <Accordion /> */}
-                    <h5 className="card-title">Special title treatment</h5>
-                    <p className="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                    {/* <Translist /> */}
                 </div>
             </div>
             <Transmodal />

@@ -8,8 +8,8 @@ const transfer = async (data) => {
     return response.data
 }
 
-const getTransactions = async () =>{
-    const request = axios.get(`${baseUrl}/getAll`)
+const getTransactions = async (data) =>{
+    const request = axios.post(`${baseUrl}/getAll`, data)
     const response = await request
     return response.data
 }

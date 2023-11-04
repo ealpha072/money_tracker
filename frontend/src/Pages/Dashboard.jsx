@@ -5,12 +5,13 @@ import accountService from "../services/account"
 import transactService from "../services/transact"
 import utilities from "../Utilities/helpers"
 import Accordion from "../Components/Accordion"
+import Translist from "../Components/Translist"
 
 const Dashboard = () => {
     //const navigate = useNavigate()
     const [activeLink, setActiveLink] = useState("Expense")
     const [accounts, setAccounts] = useState([])
-	//const [transactions, setTransactions] = useState([])
+	const [transactions, setTransactions] = useState([])
 	const userId = JSON.parse(sessionStorage.getItem('userInfo'))
 	console.log(userId._id)
 
@@ -26,17 +27,17 @@ const Dashboard = () => {
         )
     }, [])
 
-	// useEffect(() => {
-	// 	transactService.getTransactions()
-	// 	.then(response => {
-	// 		console.log(response)
-	// 		setTransactions(response.transactions)
-	// 	}
-	// 	).catch(error => {
-	// 		console.log(error)
-	// 	}
-	// 	)
-	// }, [])
+	useEffect(() => {
+		transactService.getTransactions({userId:userId._id, limit:5})
+	 	.then(response => {
+	 		console.log(response.transactions)
+	 		setTransactions(response.transactions)
+	 	}
+	 	).catch(error => {
+	 		console.log(error)
+	 	}
+	 	)
+	 }, [])
 
 
     //console.log(accounts)
@@ -102,7 +103,7 @@ const Dashboard = () => {
 						</ul>
 					</div>
 
-					<Form active={activeLink} buttonText="Add Income" />
+					<Form active={activeLink} buttonText="Add Income" accounts={accounts} />
 					</div>
 
 					<div className="mr-2 mb-2">
@@ -111,11 +112,7 @@ const Dashboard = () => {
 					</div>
 
 					<div className="card">
-						<div className="m-2">
-							<div>
-
-							</div>
-						</div>
+						<Translist transactions={transactions}/>
 					</div>
 					</div>
 				</div>
