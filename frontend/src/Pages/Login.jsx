@@ -11,18 +11,16 @@ const Login = () => {
     }
 
     const onSubmit = (formData) => {
-        console.log(formData)
+        //console.log(formData)
         userService.login(formData)
         .then(response => {
             console.log(response)
             const userInfo = JSON.stringify(response.user)
-            localStorage.setItem("userInfo", userInfo)
+            sessionStorage.setItem("userInfo", userInfo)
             navigate("/dashboard")
         }).catch(error => {
             console.log(error)
-        }
-        )
-
+        })
     }
 
     const {formData, handleInputChange, handleSubmit} = useForm(initialState, onSubmit)
