@@ -8,10 +8,12 @@ const addAccount = async (data) => {
     return response.data
 }
 
-const editAccount = async (data) => {
-    return data;
+const getAllAccounts = async () =>{
+    const request = axios.get(`${baseUrl}/getAll`)
+    const response = await request
+    return response.data
 }
 
-const accountService = {addAccount, editAccount}
+const accountService = {addAccount, getAllAccounts}
 
 export default accountService

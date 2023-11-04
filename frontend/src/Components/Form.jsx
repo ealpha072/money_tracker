@@ -94,7 +94,7 @@ const Form = (props) => {
                                     placeholder="Amount"
                                     name="amount"
                                     value={formData.amount}
-                                    // onChange={handleInputChange}
+                                    onChange={handleInputChange}
                                     required
                                 />
                                 <div className="input-group-append">
