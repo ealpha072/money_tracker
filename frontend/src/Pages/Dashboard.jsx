@@ -2,6 +2,7 @@ import { useState, useEffect } from "react"
 import Form from "../Components/Form"
 import { Link, useNavigate } from "react-router-dom"
 import accountService from "../services/account"
+import utilities from "../Utilities/helpers"
 
 const Dashboard = () => {
     //const navigate = useNavigate()
@@ -21,51 +22,48 @@ const Dashboard = () => {
     }, [])
 
     //console.log(accounts)
-
-
     const handleLinkClick = (linkname) => {
         setActiveLink(linkname)
     }
-
-    const generateRandomString = (length) => {
-        const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-        let result = '';
-      
-        for (let i = 0; i < length; i++) {
-          const randomIndex = Math.floor(Math.random() * characters.length);
-          result += characters.charAt(randomIndex);
-        }
-        return result;
-      }
 
     return (
       <div className="card">
         <div className="row">
           <div className="col-4">
             <div className="mt-4 ml-4">
-              <h4>NET WORTH</h4>
+                <div className="d-flex justify-content-between align-items-center">
+                    <h4 className="pt-2 pb-2 pl-2">NET WORTH</h4>
+                    <h4 className="pt-2 pb-2 pr-2 text-success">{utilities.getTotalNetworth(accounts).toLocaleString('en-US')} USD</h4>
+                </div>
             </div>
-            <div className="card-body ml-4">
+            <div className="card-body p-0 ml-4">
                 <div id="accordion">
                     {accounts.map(account => {
-                        const randomString = generateRandomString(7)
-                        
+                        const randomString = utilities.generateRandomString(7)
                         return (
                             <div className="card" key={account._id}>
                                 <div className="card-header" id="headingOne">
-                                    <h5 className="mb-0">
+                                    <div className="mb-0 d-flex justify-content-between align-items-center">
                                         <button className="btn btn-link" data-toggle="collapse" data-target={`#${randomString}`} aria-expanded="true" aria-controls={randomString}>
                                             {account._id}
                                         </button>
-                                        {account.totalBalance}
-                                    </h5>
+                                        <span className="text-success">{account.totalBalance.toLocaleString('en-US')} USD </span>
+                                    </div>
                                 </div>
                                 <div id={randomString} className="collapse" aria-labelledby="headingOne" data-parent="#accordion" key={account.name}>
                                     <div className="card-body">
                                         {
                                             account.accounts.map(singleAccount => {
                                                 return (
-                                                    <h6 key={singleAccount.accountname}>{singleAccount.accountname} <span>{singleAccount.balance}</span></h6>
+                                                    <div 
+                                                        className="d-flex justify-content-between align-items-center" 
+                                                        key={singleAccount.accountname}
+                                                    >
+                                                        {singleAccount.accountname} 
+                                                        <span className="text-success">
+                                                            {singleAccount.balance.toLocaleString('en-US')} USD
+                                                        </span>
+                                                    </div>
                                                 )
                                             })
                                         }
