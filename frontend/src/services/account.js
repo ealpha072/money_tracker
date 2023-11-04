@@ -8,8 +8,8 @@ const addAccount = async (data) => {
     return response.data
 }
 
-const getAllAccounts = async () =>{
-    const request = axios.get(`${baseUrl}/getAll`)
+const getAllAccounts = async (data) =>{
+    const request = axios.post(`${baseUrl}/getAll`, data)
     const response = await request
     return response.data
 }

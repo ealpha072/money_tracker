@@ -10,10 +10,12 @@ const Dashboard = () => {
     //const navigate = useNavigate()
     const [activeLink, setActiveLink] = useState("Expense")
     const [accounts, setAccounts] = useState([])
-	const [transactions, setTransactions] = useState([])
+	//const [transactions, setTransactions] = useState([])
+	const userId = JSON.parse(sessionStorage.getItem('userInfo'))
+	console.log(userId._id)
 
     useEffect(() => {
-        accountService.getAllAccounts()
+        accountService.getAllAccounts({"userId":userId._id})
         .then(response => {
             //console.log(response.accounts)
             setAccounts(response.accounts) 
@@ -24,17 +26,17 @@ const Dashboard = () => {
         )
     }, [])
 
-	useEffect(() => {
-		transactService.getTransactions()
-		.then(response => {
-			console.log(response)
-			setTransactions(response.transactions)
-		}
-		).catch(error => {
-			console.log(error)
-		}
-		)
-	}, [])
+	// useEffect(() => {
+	// 	transactService.getTransactions()
+	// 	.then(response => {
+	// 		console.log(response)
+	// 		setTransactions(response.transactions)
+	// 	}
+	// 	).catch(error => {
+	// 		console.log(error)
+	// 	}
+	// 	)
+	// }, [])
 
 
     //console.log(accounts)
