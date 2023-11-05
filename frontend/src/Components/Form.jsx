@@ -1,5 +1,6 @@
 import useForm from "../hooks/Forms";
 import transactService from "../services/transact";
+import accountService from "../services/account";
 
 const Form = (props) => {
     const userId = JSON.parse(localStorage.getItem("userInfo"))._id
@@ -20,6 +21,20 @@ const Form = (props) => {
         transactService.transfer(formData)
         .then(response => {
             console.log(response)
+            const transactionData = {
+                user_id: userId,
+                to: response.transactionDetails.to,
+                from: response.transactionDetails.from,
+                amount: response.transactionDetails.amount,
+            }
+
+            accountService.updateBalance(transactionData)
+            .then(response => {
+                console.log(response)
+            })
+            .catch(error => {
+                console.log(error)
+            })
         }).catch(error => {
             console.log(error)
         }
@@ -32,17 +47,23 @@ const Form = (props) => {
         <form action="" className="mt-4" onSubmit={handleSubmit}>
             <div className="form-row">
                 <div className="col-9">
-                    <label htmlFor="Account_name">From</label>
+
+                    <label htmlFor="Account_name">{props.active === "Income" ? "To" : "From"}</label>
                     <select 
                         className="custom-select" 
-                        name="from"
+                        name={props.active === "Income" ? "to" : "from"}
                         onChange={handleInputChange}
                         value={formData.from}
                         required
                     >
                         <option defaultValue={""}>Choose...</option>
-                        <option value="Alpha">Alpha</option>
-                        <option value="Savings Account">Savings Account</option>
+                        {
+                            props.accountNames.map((accountName, index) => {
+                                return (
+                                    <option key={index} value={accountName.accountname}>{accountName.accountname}</option>
+                                )
+                            })
+                        }
                     </select>
                 </div>
 
@@ -80,8 +101,13 @@ const Form = (props) => {
                                 required
                             >
                                 <option defaultValue={""}>Choose...</option>
-                                <option value="Cash">Alpha</option>
-                                <option value="Standard Chatered">Standard Chatered</option>
+                                {
+                                    props.accountNames.map((accountName, index) => {
+                                        return (
+                                            <option key={index} value={accountName.accountname}>{accountName.accountname}</option>
+                                        )
+                                    })
+                                }
                             </select>
                         </div>
 

@@ -14,6 +14,12 @@ const getAllAccounts = async (data) =>{
     return response.data
 }
 
-const accountService = {addAccount, getAllAccounts}
+const updateBalance = async (data) => {
+    const request = axios.put(`${baseUrl}/updateBalance`, data)
+    const response = await request
+    return response.data
+}
+
+const accountService = {addAccount, getAllAccounts, updateBalance}
 
 export default accountService

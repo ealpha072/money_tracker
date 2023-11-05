@@ -9,7 +9,7 @@ import Translist from "../Components/Translist"
 
 const Dashboard = (props) => {
     //const navigate = useNavigate()
-	const { accounts, transactions} = props
+	const { accounts, accountNames, transactions} = props
     const [activeLink, setActiveLink] = useState("Expense")
     // const [accounts, setAccounts] = useState([])
 	// const [transactions, setTransactions] = useState([])
@@ -104,7 +104,7 @@ const Dashboard = (props) => {
 						</ul>
 					</div>
 
-					<Form active={activeLink} buttonText="Add Income" />
+					<Form active={activeLink} buttonText="Add Income" accountNames={accountNames} />
 					</div>
 
 					<div className="mr-2 mb-2">

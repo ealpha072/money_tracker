@@ -37,8 +37,10 @@ accountRoute.post("/add", async (req, res, next) => {
 
 accountRoute.post("/getAll", async(req, res, next) => {
     const {userId} = req.body
-    
+
     try {
+        const accountNames = await Account.find({user_id:userId}).sort({accountname:1}).select('accountname');
+
         const allAccounts  = await Account.aggregate([
             {
                 $match: { user_id: new mongoose.Types.ObjectId(userId) } // Filter documents by user_id
@@ -60,11 +62,27 @@ accountRoute.post("/getAll", async(req, res, next) => {
                 $sort: { _id: 1 }
             }
         ])
-        res.status(200).json({accounts:allAccounts})
+        res.status(200).json({accounts:allAccounts, accountNames:accountNames})
+
     } catch (error) {
         logger.error(error.message)
         next(error)
     }
 })
+
+accountRoute.put("/updateBalance", async(req, res, next) => {
+    const {user_id, to, from, amount} = req.body
+
+    try {
+        //
+        const accountTo = await Account.findOneAndUpdate(
+            {_id:ObjectId()},
+            {$inc:{}}
+        )
+    } catch (error) {
+        
+    }
+})
+
 
 export default accountRoute

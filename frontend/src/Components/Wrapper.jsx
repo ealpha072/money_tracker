@@ -7,12 +7,14 @@ const Wrapper = ({componentProp}) => {
 	const userId = JSON.parse(sessionStorage.getItem('userInfo'))
 
 	const [accounts, setAccounts] = useState([])
+	const [accountNames, setAccountNames] = useState([])
 	const [transactions, setTransactions] = useState([])
 
 	useEffect(() => {
         accountService.getAllAccounts({"userId":userId._id})
         .then(response => {
-            //console.log(response.accounts)
+            //console.log(response.accountNames)
+			setAccountNames(response.accountNames)
             setAccounts(response.accounts) 
         }
         ).catch(error => {
@@ -24,7 +26,7 @@ const Wrapper = ({componentProp}) => {
 	useEffect(() => {
 		transactService.getTransactions({userId:userId._id, limit:5})
 	 	.then(response => {
-	 		console.log(response.transactions)
+	 		//console.log(response.transactions)
 	 		setTransactions(response.transactions)
 	 	}
 	 	).catch(error => {
@@ -35,6 +37,7 @@ const Wrapper = ({componentProp}) => {
 
 	 const childComponentWithState = React.cloneElement(componentProp, {
 		userId,
+		accountNames,
 		accounts,
 		transactions
 	 })
