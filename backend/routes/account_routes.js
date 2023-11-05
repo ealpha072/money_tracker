@@ -2,6 +2,7 @@ import express from "express";
 import Account from "../models/Account.js";
 import bcrypt from "bcryptjs";
 import logger from "../utils/logger.js";
+import mongoose from "mongoose";
 
 const accountRoute = express.Router();
 
@@ -34,10 +35,14 @@ accountRoute.post("/add", async (req, res, next) => {
     }
 })
 
-accountRoute.get("/getAll", async(req, res, next) => {
+accountRoute.post("/getAll", async(req, res, next) => {
+    const {userId} = req.body
+    
     try {
-        //const allAccounts = await Account.find({});
         const allAccounts  = await Account.aggregate([
+            {
+                $match: { user_id: new mongoose.Types.ObjectId(userId) } // Filter documents by user_id
+            },
             {
                 $group: {
 
