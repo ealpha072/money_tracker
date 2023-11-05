@@ -1,21 +1,22 @@
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import Form from "../Components/Form"
-import { Link, useNavigate } from "react-router-dom"
-import accountService from "../services/account"
-import transactService from "../services/transact"
+import { Link } from "react-router-dom"
+// import accountService from "../services/account"
+// import transactService from "../services/transact"
 import utilities from "../Utilities/helpers"
 import Accordion from "../Components/Accordion"
 import Translist from "../Components/Translist"
 
-const Dashboard = () => {
+const Dashboard = (props) => {
     //const navigate = useNavigate()
+	const { accounts, transactions} = props
     const [activeLink, setActiveLink] = useState("Expense")
-    const [accounts, setAccounts] = useState([])
-	const [transactions, setTransactions] = useState([])
-	const userId = JSON.parse(sessionStorage.getItem('userInfo'))
-	console.log(userId._id)
+    // const [accounts, setAccounts] = useState([])
+	// const [transactions, setTransactions] = useState([])
+	// const userId = JSON.parse(sessionStorage.getItem('userInfo'))
+	//console.log(userId._id)
 
-    useEffect(() => {
+    /*useEffect(() => {
         accountService.getAllAccounts({"userId":userId._id})
         .then(response => {
             //console.log(response.accounts)
@@ -37,7 +38,7 @@ const Dashboard = () => {
 	 		console.log(error)
 	 	}
 	 	)
-	 }, [])
+	 }, [])*/
 
 
     //console.log(accounts)
@@ -103,7 +104,7 @@ const Dashboard = () => {
 						</ul>
 					</div>
 
-					<Form active={activeLink} buttonText="Add Income" accounts={accounts} />
+					<Form active={activeLink} buttonText="Add Income" />
 					</div>
 
 					<div className="mr-2 mb-2">

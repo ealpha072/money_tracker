@@ -1,15 +1,51 @@
+import React, { useState,useEffect } from "react";
 import { Link } from "react-router-dom";
+import transactService from "../services/transact";
+import accountService from "../services/account";
 
 const Wrapper = ({componentProp}) => {
-	//console.log(userInfo);
+	const userId = JSON.parse(sessionStorage.getItem('userInfo'))
+
+	const [accounts, setAccounts] = useState([])
+	const [transactions, setTransactions] = useState([])
+
+	useEffect(() => {
+        accountService.getAllAccounts({"userId":userId._id})
+        .then(response => {
+            //console.log(response.accounts)
+            setAccounts(response.accounts) 
+        }
+        ).catch(error => {
+            console.log(error)
+        }
+        )
+    }, [])
+
+	useEffect(() => {
+		transactService.getTransactions({userId:userId._id, limit:5})
+	 	.then(response => {
+	 		console.log(response.transactions)
+	 		setTransactions(response.transactions)
+	 	}
+	 	).catch(error => {
+	 		console.log(error)
+	 	}
+	 	)
+	 }, [])
+
+	 const childComponentWithState = React.cloneElement(componentProp, {
+		userId,
+		accounts,
+		transactions
+	 })
 
   	return (
 		<div className="wrapper">
 			{/* Sidebar */}
 			<nav id="sidebar">
 				<div className="sidebar-header">
-					<h3>Bootstrap Sidebar</h3>
-					<strong>BS</strong>
+					<h3>Money Tracker</h3>
+					<strong>MT</strong>
 				</div>
 
 				<ul className="list-unstyled components">
@@ -63,7 +99,7 @@ const Wrapper = ({componentProp}) => {
 				</div>
 			</nav>
 
-			{componentProp}
+			{childComponentWithState}
 		</div>
 		</div>
   );

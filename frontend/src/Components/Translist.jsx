@@ -1,11 +1,11 @@
-import React from "react";
+import utilities from "../Utilities/helpers";
 
 const Translist = ({ transactions }) => {
     return (
         <div className="m-4">
             {transactions.map((transaction) => {
                 return (
-                <div className="d-flex  align-items-center">
+                <div className="d-flex  align-items-center" key={utilities.generateRandomString(6)}>
                     <p>
                     {transaction.date == null
                         ? "No date"

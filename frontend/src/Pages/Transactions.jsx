@@ -2,7 +2,8 @@ import { Link } from "react-router-dom"
 import Transmodal from "../Components/Transmodal"
 import Translist from "../Components/Translist"
 
-const Transactions = () => {
+const Transactions = (props) => {
+    const { transactions} = props
 
     return (
         <div>
@@ -31,7 +32,7 @@ const Transactions = () => {
                 </div>
                 <div className="card-body">
                     {/* <Accordion /> */}
-                    {/* <Translist /> */}
+                    <Translist transactions={transactions}/>
                 </div>
             </div>
             <Transmodal />
