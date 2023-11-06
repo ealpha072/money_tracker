@@ -71,16 +71,22 @@ accountRoute.post("/getAll", async(req, res, next) => {
 })
 
 accountRoute.put("/updateBalance", async(req, res, next) => {
-    const {user_id, to, from, amount} = req.body
+    const {user_id, transactionId, to, from, amount} = req.body
 
     try {
         //
+        //const searchTranaction = 
         const accountTo = await Account.findOneAndUpdate(
-            {_id:ObjectId()},
-            {$inc:{}}
+            {_id:ObjectId(transactionId)},
+            {$inc:{amount: parseInt(amount)}},
+            {new: true}
         )
+
+        const accountFrom = await Account.findOneAndUpdate(
+            
+        )
+
     } catch (error) {
-        
     }
 })
 

@@ -23,6 +23,7 @@ const Form = (props) => {
             console.log(response)
             const transactionData = {
                 user_id: userId,
+                transactionId: response.transactionDetails._id,
                 to: response.transactionDetails.to,
                 from: response.transactionDetails.from,
                 amount: response.transactionDetails.amount,
