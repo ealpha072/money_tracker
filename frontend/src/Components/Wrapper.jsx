@@ -1,10 +1,13 @@
 import React, { useState,useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import transactService from "../services/transact";
 import accountService from "../services/account";
 
 const Wrapper = ({componentProp}) => {
+	const navigate = useNavigate()
+
 	const userId = JSON.parse(sessionStorage.getItem('userInfo'))
+	console.log(userId)
 
 	const [accounts, setAccounts] = useState([])
 	const [accountNames, setAccountNames] = useState([])
@@ -41,6 +44,14 @@ const Wrapper = ({componentProp}) => {
 		accounts,
 		transactions
 	 })
+
+	 const handleLogoutClick = () => {
+		sessionStorage.removeItem('userInfo')
+		setAccountNames([])
+		setAccounts([])
+		setTransactions([])
+		navigate('/logout')
+	}
 
   	return (
 		<div className="wrapper">
@@ -93,7 +104,10 @@ const Wrapper = ({componentProp}) => {
 					>
 						<ul className="nav navbar-nav ml-auto">
 							<li className="nav-item active">
-								<Link to={"/logout"} className="nav-link" href="#">
+								<Link 
+									//onClick={handleLogoutClick} 
+									className="nav-link"
+								>
 									Logout
 								</Link>
 							</li>

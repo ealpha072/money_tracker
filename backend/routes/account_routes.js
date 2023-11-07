@@ -40,7 +40,7 @@ accountRoute.post("/getAll", async(req, res, next) => {
 
     try {
         const accountNames = await Account.find({user_id:userId}).sort({accountname:1}).select('accountname');
-
+        console.log(accountNames);
         const allAccounts  = await Account.aggregate([
             {
                 $match: { user_id: new mongoose.Types.ObjectId(userId) } // Filter documents by user_id
@@ -83,7 +83,7 @@ accountRoute.put("/updateBalance", async(req, res, next) => {
         )
 
         const accountFrom = await Account.findOneAndUpdate(
-            
+
         )
 
     } catch (error) {

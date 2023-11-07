@@ -21,7 +21,7 @@ const Form = (props) => {
         transactService.transfer(formData)
         .then(response => {
             console.log(response)
-            const transactionData = {
+            /*const transactionData = {
                 user_id: userId,
                 transactionId: response.transactionDetails._id,
                 to: response.transactionDetails.to,
@@ -29,13 +29,13 @@ const Form = (props) => {
                 amount: response.transactionDetails.amount,
             }
 
-            accountService.updateBalance(transactionData)
+            /*accountService.updateBalance(transactionData)
             .then(response => {
                 console.log(response)
             })
             .catch(error => {
                 console.log(error)
-            })
+            })*/
         }).catch(error => {
             console.log(error)
         }
