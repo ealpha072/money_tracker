@@ -1,7 +1,8 @@
 import useForm from "../hooks/Forms"
 import accountService from "../services/account"
 
-const Modal = () => {
+const Modal = (props) => {
+    const {setAccounts, setAccountNames} = props
     const userId = JSON.parse(sessionStorage.getItem("userInfo"))._id
     //console.log(userId)
     
@@ -15,7 +16,13 @@ const Modal = () => {
     const onSubmit = (formData) => {
         console.log(formData)
         accountService.addAccount(formData)
-        .then(response => console.log(response))
+        .then(response => {
+            if (response.accounts && response.account.length > 0){
+                setAccounts(response.accounts)
+                //setAccountNames(response.accountNames)
+            }
+            console.log(response)
+        })
         .catch(error => console.log(error))
     }
 

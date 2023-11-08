@@ -42,7 +42,10 @@ const Wrapper = ({componentProp}) => {
 		userId,
 		accountNames,
 		accounts,
-		transactions
+		transactions,
+		setAccounts,
+		setAccountNames,
+		setTransactions,
 	})
 
 	const handleLogoutClick = (e) => {
