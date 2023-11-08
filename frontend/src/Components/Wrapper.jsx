@@ -7,7 +7,7 @@ const Wrapper = ({componentProp}) => {
 	const navigate = useNavigate()
 
 	const userId = JSON.parse(sessionStorage.getItem('userInfo'))
-	console.log(userId)
+	//console.log(userId)
 
 	const [accounts, setAccounts] = useState([])
 	const [accountNames, setAccountNames] = useState([])
@@ -38,14 +38,15 @@ const Wrapper = ({componentProp}) => {
 	 	)
 	 }, [])
 
-	 const childComponentWithState = React.cloneElement(componentProp, {
+	const childComponentWithState = React.cloneElement(componentProp, {
 		userId,
 		accountNames,
 		accounts,
 		transactions
-	 })
+	})
 
-	 const handleLogoutClick = () => {
+	const handleLogoutClick = (e) => {
+		e.preventDefault()
 		sessionStorage.removeItem('userInfo')
 		setAccountNames([])
 		setAccounts([])
@@ -99,17 +100,14 @@ const Wrapper = ({componentProp}) => {
 					</button>
 
 					<div
-					className="collapse navbar-collapse"
-					id="navbarSupportedContent"
+						className="collapse navbar-collapse"
+						id="navbarSupportedContent"
 					>
 						<ul className="nav navbar-nav ml-auto">
 							<li className="nav-item active">
-								<Link 
-									//onClick={handleLogoutClick} 
-									className="nav-link"
-								>
+								<button className="btn nav-link" href="#" onClick={handleLogoutClick}>
 									Logout
-								</Link>
+								</button>
 							</li>
 						</ul>
 					</div>

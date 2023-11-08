@@ -8,40 +8,9 @@ import Accordion from "../Components/Accordion"
 import Translist from "../Components/Translist"
 
 const Dashboard = (props) => {
-    //const navigate = useNavigate()
 	const { accounts, accountNames, transactions} = props
     const [activeLink, setActiveLink] = useState("Expense")
-    // const [accounts, setAccounts] = useState([])
-	// const [transactions, setTransactions] = useState([])
-	// const userId = JSON.parse(sessionStorage.getItem('userInfo'))
-	//console.log(userId._id)
 
-    /*useEffect(() => {
-        accountService.getAllAccounts({"userId":userId._id})
-        .then(response => {
-            //console.log(response.accounts)
-            setAccounts(response.accounts) 
-        }
-        ).catch(error => {
-            console.log(error)
-        }
-        )
-    }, [])
-
-	useEffect(() => {
-		transactService.getTransactions({userId:userId._id, limit:5})
-	 	.then(response => {
-	 		console.log(response.transactions)
-	 		setTransactions(response.transactions)
-	 	}
-	 	).catch(error => {
-	 		console.log(error)
-	 	}
-	 	)
-	 }, [])*/
-
-
-    //console.log(accounts)
     const handleLinkClick = (linkname) => {
         setActiveLink(linkname)
     }
@@ -70,11 +39,11 @@ const Dashboard = (props) => {
 						<ul className="nav nav-tabs row" role="tablist">
 						<li className="nav-item col">
 							<Link
-							className={`nav-link text-danger ${
-								activeLink === "Expense" ? "active" : ""
-							}`}
-							href="#"
-							onClick={() => handleLinkClick("Expense")}
+								className={`nav-link text-danger ${
+									activeLink === "Expense" ? "active" : ""
+								}`}
+								href="#"
+								onClick={() => handleLinkClick("Expense")}
 							>
 							Expense
 							</Link>

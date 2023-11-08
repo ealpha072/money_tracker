@@ -2,8 +2,8 @@ import useForm from "../hooks/Forms"
 import accountService from "../services/account"
 
 const Modal = () => {
-    const userId = JSON.parse(localStorage.getItem("userInfo"))._id
-    console.log(userId)
+    const userId = JSON.parse(sessionStorage.getItem("userInfo"))._id
+    //console.log(userId)
     
     const initialState = {
         user_id: userId,

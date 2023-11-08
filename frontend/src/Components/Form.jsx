@@ -1,9 +1,9 @@
 import useForm from "../hooks/Forms";
 import transactService from "../services/transact";
-import accountService from "../services/account";
+//import accountService from "../services/account";
 
 const Form = (props) => {
-    const userId = JSON.parse(localStorage.getItem("userInfo"))._id
+    const userId = JSON.parse(localStorage.getItem("userInfo"))
     //console.log(props.active)
 
     const initialState = {

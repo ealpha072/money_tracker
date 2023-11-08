@@ -18,9 +18,9 @@ transactRoute.post("/transfer", async(req, res, next) => {
 })
 
 transactRoute.post("/getAll", async(req, res, next) => {
-    const {userId, limit} = req.body
+    const {userId} = req.body
     try {
-        const allTrans = await Transaction.find({user_id:userId}).sort({date:1}).limit(limit)
+        const allTrans = await Transaction.find({user_id:userId}).sort({date:1})
         // const allTrans  = await Transaction.aggregate([
         //     {
         //         $match: { user_id: new mongoose.Types.ObjectId(userId) } // Filter documents by user_id
