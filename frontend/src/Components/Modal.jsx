@@ -1,5 +1,6 @@
 import useForm from "../hooks/Forms"
 import accountService from "../services/account"
+//import accountService from "../services/account"
 
 const Modal = (props) => {
     const {setAccounts, setAccountNames} = props
@@ -13,17 +14,17 @@ const Modal = (props) => {
         balance: '',
     }
 
-    const onSubmit = (formData) => {
-        console.log(formData)
-        accountService.addAccount(formData)
-        .then(response => {
+    const onSubmit = async (formData) => {
+        try{
+            const response = await accountService.addAccount(formData)
             if (response.accounts && response.account.length > 0){
-                setAccounts(response.accounts)
-                //setAccountNames(response.accountNames)
+                const responseData = await accountService.getAllAccounts(userId)
+                console.log(responseData)
+                setAccounts(responseData.accounts)
+                setAccountNames(responseData.accountNames)
             }
-            console.log(response)
-        })
-        .catch(error => console.log(error))
+            document.getElementById('modalForm').reset();
+        }catch(error){console.log(error)}
     }
 
     const {formData, handleInputChange, handleSubmit} = useForm(initialState, onSubmit)
@@ -39,7 +40,7 @@ const Modal = (props) => {
                         </button>
                     </div>
                     <div className="modal-body">
-                        <form action="" onSubmit={handleSubmit}>
+                        <form action="" onSubmit={handleSubmit} id="modalForm">
                             <div className="form-row">
                                 <div className="col">
                                     <label htmlFor="Account_name">Account Name</label>
@@ -50,9 +51,8 @@ const Modal = (props) => {
                                         name="accountname"
                                         value={formData.accountname}
                                         onChange={handleInputChange}
+                                        required
                                     />
-
-                                    
                                 </div>
                                 <div className="col">
                                     <label htmlFor="Account_name">Group</label>
@@ -62,6 +62,7 @@ const Modal = (props) => {
                                         onChange={handleInputChange} 
                                         name="group"
                                         value={formData.group}
+                                        required
                                     >
                                         <option defaultValue>Choose...</option>
                                         <option value="Cash">Cash</option>
@@ -78,20 +79,20 @@ const Modal = (props) => {
                                             name="balance"
                                             value={formData.balance}
                                             onChange={handleInputChange}
+                                            required
                                         />
 
                                         <div className="input-group-append">
                                             <div className="input-group-text"><strong>USD</strong></div>
                                         </div>
                                     </div>
-
-                                    <button type="submit" className="btn btn-block btn-primary">Save changes</button>
+                                    <button type="submit" className="btn btn-block btn-primary mb-2">Save changes</button>
+                                    <button type="button" className="btn btn-secondary btn-block" data-dismiss="modal">Close</button>
                                 </div>
                             </div>
                         </form>
                     </div>
                     <div className="modal-footer">
-                        
                     </div>
                 </div>
             </div>

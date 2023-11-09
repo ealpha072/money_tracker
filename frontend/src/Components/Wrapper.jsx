@@ -7,7 +7,6 @@ const Wrapper = ({componentProp}) => {
 	const navigate = useNavigate()
 
 	const userId = JSON.parse(sessionStorage.getItem('userInfo'))
-	//console.log(userId)
 
 	const [accounts, setAccounts] = useState([])
 	const [accountNames, setAccountNames] = useState([])
@@ -18,13 +17,13 @@ const Wrapper = ({componentProp}) => {
         .then(response => {
             //console.log(response.accountNames)
 			setAccountNames(response.accountNames)
-            setAccounts(response.accounts) 
+            setAccounts(prevAccounts => response.accounts) 
         }
         ).catch(error => {
             console.log(error)
         }
         )
-    }, [])
+    }, [userId._id])
 
 	useEffect(() => {
 		transactService.getTransactions({userId:userId._id, limit:5})
