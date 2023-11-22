@@ -1,7 +1,0 @@
-const transActionTypes = {
-
-}
-
-const accountActionTypes = {
-    
-}
