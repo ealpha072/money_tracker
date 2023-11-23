@@ -7,7 +7,7 @@ import { useEffect } from "react"
 
 const Signup = () => {
     const navigate = useNavigate()
-    const dispatch = useDispatch
+    const dispatch = useDispatch()
     const {isRegistered, errorMessage } = useSelector(userSelector)
 
     useEffect(() => {
@@ -26,6 +26,7 @@ const Signup = () => {
     const onSubmit = (formData) => {
         console.log(formData)
         dispatch(signupUser(formData))
+        navigate("/")
     }
 
     const {formData, handleInputChange, handleSubmit} = useForm(initialState, onSubmit)

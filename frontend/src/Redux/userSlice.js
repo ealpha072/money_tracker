@@ -8,12 +8,25 @@ export const signupUser = createAsyncThunk(
     async(data, thunkAPI) => {
         try{
             const response = await axios.post(`${baseUrl}/signup`, data)
-            console.log(response.data)
+            return response.data
+            //console.log(response.data)
         }catch (err){
             return isRejectedWithValue(err.message)
         }
     }
 )
+
+// export const loginUser = createAsyncThunk(
+//     'user/signup',
+//     async(data, thunkAPI) => {
+//         try{
+//             const response = await axios.post(`${baseUrl}/signup`, data)
+//             console.log(response.data)
+//         }catch (err){
+//             return isRejectedWithValue(err.message)
+//         }
+//     }
+// )
 
 export const userSlice = createSlice({
     name: 'user',
@@ -24,7 +37,8 @@ export const userSlice = createSlice({
         isError:false,
         isLoggedIn:false,
         isRegistered:false,
-        errorMessage:''
+        errorMessage:'',
+        successMessage: ''
     },
     reducers:{
         clearState: (state)=>{
@@ -47,15 +61,17 @@ export const userSlice = createSlice({
             state.isError = true
             state.errorMessage = payload.error
         },
-        [signupUser.fulfilled]: (state, {payload})=>{
+        [signupUser.fulfilled]: (state, {payload}) => {
             state.isFetching = false
             state.isSuccess = true
-            if(payload.error){
+            if(payload.message && payload.message === "User registered successfully"){
+                state.isRegistered = true
+                state.successMessage = payload.message
+            }else{
                 state.isError = true
                 state.errorMessage = payload.message
-            }else{
-                state.isRegistered = true
             }
+            console.log(payload)
         }
     }
 })
