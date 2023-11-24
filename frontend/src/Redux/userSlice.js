@@ -9,24 +9,23 @@ export const signupUser = createAsyncThunk(
         try{
             const response = await axios.post(`${baseUrl}/signup`, data)
             return response.data
-            //console.log(response.data)
         }catch (err){
             return isRejectedWithValue(err.message)
         }
     }
 )
 
-// export const loginUser = createAsyncThunk(
-//     'user/signup',
-//     async(data, thunkAPI) => {
-//         try{
-//             const response = await axios.post(`${baseUrl}/signup`, data)
-//             console.log(response.data)
-//         }catch (err){
-//             return isRejectedWithValue(err.message)
-//         }
-//     }
-// )
+export const loginUser = createAsyncThunk(
+    'user/login',
+    async(data, thunkAPI) => {
+        try{
+            const response = await axios.post(`${baseUrl}/login`, data)
+            return response.data
+        }catch (err){
+            return isRejectedWithValue(err.message)
+        }
+    }
+)
 
 export const userSlice = createSlice({
     name: 'user',
@@ -66,6 +65,29 @@ export const userSlice = createSlice({
             state.isSuccess = true
             if(payload.message && payload.message === "User registered successfully"){
                 state.isRegistered = true
+                state.successMessage = payload.message
+            }else{
+                state.isError = true
+                state.errorMessage = payload.message
+            }
+            console.log(payload)
+        },
+        [loginUser.pending]: (state) =>{
+            state.isFetching = true
+        },
+        [loginUser.rejected]: (state, {payload}) => {
+            console.log(payload)
+            state.isFetching = false
+            state.isSuccess = false
+            state.isError = true
+            state.errorMessage = payload.message
+        },
+        [loginUser.fulfilled]: (state, {payload}) => {
+            state.isFetching = false
+            state.isSuccess = true
+            if(payload.message && payload.message === "Login successfull"){
+                state.isRegistered = true
+                state.isLoggedIn = true
                 state.successMessage = payload.message
             }else{
                 state.isError = true

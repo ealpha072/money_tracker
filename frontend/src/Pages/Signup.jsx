@@ -1,6 +1,5 @@
 import { Link, useNavigate } from "react-router-dom"
 import useForm from "../hooks/Forms"
-//import userService from "../services/users"
 import { signupUser, userSelector, clearState } from "../Redux/userSlice"
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from "react"
@@ -94,7 +93,6 @@ const Signup = () => {
                             Have an account ? <Link to={"/"} className="text-success">Login</Link>
                             </small>
                         </div>
-                    
                         <button type="submit" className="btn btn-block btn-primary">Submit</button>
                     </form>
                 </div>

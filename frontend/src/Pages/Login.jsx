@@ -1,27 +1,45 @@
 import { Link, useNavigate } from "react-router-dom";
 import useForm from "../hooks/Forms";
 import userService from "../services/users";
+import { loginUser, userSelector, clearState } from "../Redux/userSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
 
 const Login = () => {
     const navigate = useNavigate()
+    const dispatch = useDispatch()
+    const {isLoggedIn, errorMessage} = useSelector(userSelector)
+
+    useEffect(()=>{
+        if(isLoggedIn === true){
+            dispatch(clearState)
+            navigate('/')
+        }
+    }, [isLoggedIn])
 
     const initialState = {
         email:"",
         password:"",
     }
 
-    const onSubmit = (formData) => {
-        //console.log(formData)
-        userService.login(formData)
-        .then(response => {
-            console.log(response)
-            const userInfo = JSON.stringify(response.user)
-            sessionStorage.setItem("userInfo", userInfo)
-            navigate("/dashboard")
-        }).catch(error => {
-            console.log(error)
-        })
+    const onSubmit = formData => {
+        console.log(formData)
+        dispatch(loginUser(formData))
+        navigate('/')
     }
+
+    // const onSubmit = (formData) => {
+    //     //console.log(formData)
+    //     userService.login(formData)
+    //     .then(response => {
+    //         console.log(response)
+    //         const userInfo = JSON.stringify(response.user)
+    //         sessionStorage.setItem("userInfo", userInfo)
+    //         navigate("/dashboard")
+    //     }).catch(error => {
+    //         console.log(error)
+    //     })
+    // }
 
     const {formData, handleInputChange, handleSubmit} = useForm(initialState, onSubmit)
 
