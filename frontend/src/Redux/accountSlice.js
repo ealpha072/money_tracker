@@ -26,3 +26,40 @@ export const getAllAccounts = createAsyncThunk(
         }
     }
 )
+
+export const updateBalance = createAsyncThunk(
+    'account/updateBalance',
+    async(data, thunkAPI) => {
+        try{
+            const response = await axios.post(`${baseUrl}/updateBalance`, data)
+            return response.data
+        }catch(error){
+            return isRejectedWithValue(error.message)
+        }
+    }
+)
+
+export const accountSlice = createSlice({
+    name: 'account',
+    initialState:{
+        accounts:[],
+        isFetching:false,
+        isSuccess:false,
+        isError:false,
+        errorMessage:'',
+        successMessage: ''
+    },
+    reducers:{
+        clearState: (state) => {
+            state.isFetching = false
+            state.isError = false
+            return state
+        },
+        clearErrorMessage: (state)=>{
+            state.errorMessage=''
+        }
+    },
+    extraReducers:{
+        
+    }
+})
